@@ -63,7 +63,7 @@ class Mesh( Topo ):
             self.addLink(hosts[i], switches[i]) #linking hosts to corresponding switches
         for i in range(n):
                 for j in range(i+1,n):
-                    net.addLink(switches[i],switches[j]) #linking switches
+                    self.addLink(switches[i],switches[j]) #linking switches
 
 class Ring( Topo ):
     "Ring Topology"
@@ -84,5 +84,6 @@ class Ring( Topo ):
             self.addLink(hosts[i], switches[i]) #linking hosts to corresponding switches
         for i in range(n):
             self.addLink(switches[i],switches[(i+1)%n]) #linking switches
+        self.addLink(switches[0],switches[n-1])
 
 topos = { 'linear': ( lambda: Linear() ), 'star': ( lambda: Star() ), 'mesh': ( lambda: Mesh() ), 'ring': ( lambda: Ring() ), }
